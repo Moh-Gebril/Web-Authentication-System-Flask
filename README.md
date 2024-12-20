@@ -36,8 +36,8 @@ A secure, production-ready Flask authentication system with role-based access co
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/flask-auth-system.git
-cd flask-auth-system
+git clone https://github.com/Moh-Gebril/Web-Authentication-System-Flask.git
+cd Web-Authentication-System-Flask
 ```
 
 2. Create a `.env` file:
