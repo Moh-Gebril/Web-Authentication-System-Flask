@@ -1,0 +1,50 @@
+services:
+  flask_app:
+    container_name: flask_app
+    build:
+      context: .
+      dockerfile: Dockerfile  
+    ports:
+      - "4000:4000"
+    environment:
+      - DB_URL=postgresql://postgres:postgres@flask_db:5432/postgres
+    depends_on:
+      - flask_db
+      - redis
+    env_file:
+      - .env
+
+  flask_db:
+    container_name: flask_db
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    container_name: flask_redis  # Corrected indentation
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+
+  test:
+    container_name: flask_test
+    build:
+      context: .
+      dockerfile: Dockerfile  
+    command: ["python3", "-m", "pytest", "tests/test_routes.py"]
+    environment:
+      - DB_URL=postgresql://postgres:postgres@flask_db:5432/postgres
+    depends_on:
+      - flask_db
+    volumes:
+      - .:/app
+
+volumes:
+  pgdata: {}
+  redisdata: {}

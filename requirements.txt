@@ -1,0 +1,11 @@
+Flask
+Flask-SQLAlchemy
+Flask-Limiter
+Flask-CORS
+flask-session
+redis
+Werkzeug
+psycopg2-binary
+psutil
+pytest
+python-dotenv
